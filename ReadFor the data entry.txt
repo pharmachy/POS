@@ -1,0 +1,7 @@
+Some data should be added sequentially ...
+as 
+Department>then > Categories> subCategories> Brand >Model > Unit>Pack
+Manufacture/Company>
+Supplier > Client
+Product>PO>PO List>  Purchase
+
