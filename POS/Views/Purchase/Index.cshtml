@@ -1,0 +1,70 @@
+﻿@model IEnumerable<POS.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Purchase List</li>
+                    </ol>
+                </nav>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12 table-responsive-md">
+                        <a class="btn btn-xs btn-info float-right" asp-controller="Purchase" asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Create</a><br />
+                        <br />
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="background-color:burlywood">
+
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Total Price</th>
+                                    <th>Purchase Date</th>
+                                    <th class="text-warning text-center">Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var c in Model)
+                                {
+                                <tr>
+                                    <td>@c.Product.ProductName</td>
+                                    @*<td>
+                                        <a asp-action="Details" asp-route-id="@c.PurchaseId">
+                                            @c.Product.ProductName
+                                        </a>
+                                    </td>*@
+                                    <td>@c.Quantity</td>
+                                    <td>@c.UnitPrice</td>
+                                    <td>@c.Discount</td>
+                                    <td>@c.TotalPrice</td>
+                                    @*<td>@c.PurchaseDate</td>*@
+                                    <td>@c.PurchaseDate.ToString("dd/MM/yyyy")</td>
+
+
+                                    <td>
+                                        <a class="text-primary btn btn-primary" asp-action="Edit" asp-route-id="@c.PurchaseId"><i class="fa fa-edit"></i>Edit</a>
+                                    </td>
+                                    <td><a class="text-danger btn btn-danger" asp-action="Delete" asp-route-id="@c.PurchaseId"><i class="fa fa-trash"></i>Delete</a></td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

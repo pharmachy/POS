@@ -1,0 +1,300 @@
+﻿@model POS.Models.Pack
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style type="text/css">
+    .form-style-9 {
+        max-width: 450px;
+        background: #FAFAFA;
+        padding: 30px;
+        margin: 50px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+    }
+
+        .form-style-9 ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+            .form-style-9 ul li {
+                display: block;
+                margin-bottom: 10px;
+                min-height: 35px;
+            }
+
+                .form-style-9 ul li .field-style {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    padding: 8px;
+                    outline: none;
+                    border: 1px solid #B0CFE0;
+                    -webkit-transition: all 0.30s ease-in-out;
+                    -moz-transition: all 0.30s ease-in-out;
+                    -o-transition: all 0.30s ease-in-out;
+                }
+
+                    .form-style-9 ul li .field-style:focus {
+                        box-shadow: 0 0 5px #B0CFE0;
+                        border: 1px solid #B0CFE0;
+                    }
+
+                .form-style-9 ul li .field-split {
+                    width: 49%;
+                }
+
+                .form-style-9 ul li .field-full {
+                    width: 100%;
+                }
+
+                .form-style-9 ul li input h3 .align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li input h3.align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li textarea {
+                    width: 100%;
+                    height: 100px;
+                }
+
+                .form-style-9 ul li input[type="button"],
+                .form-style-9 ul li input[type="submit"] {
+                    -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    background-color: #216288;
+                    border: 1px solid #17445E;
+                    display: inline-block;
+                    cursor: pointer;
+                    color: #FFFFFF;
+                    padding: 8px 18px;
+                    text-decoration: none;
+                    font: 12px Arial, Helvetica, sans-serif;
+                }
+
+                    .form-style-9 ul li input[type="button"]:hover,
+                    .form-style-9 ul li input[type="submit"]:hover {
+                        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+                        background-color: #28739E;
+                    }
+
+    #bck {
+        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+        background-color: #28739E;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+<h4>Pack</h4>
+<hr />
+@{
+    List<Pack> listofOption = ViewBag.Packs as List<Pack>;
+
+    <div class="row">
+
+        <div class="col-md-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"></a>Home</li>
+                            <li class="breadcrumb-item active" aria-current="page">Pack List</li>
+                        </ol>
+                    </nav>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="myForm" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <label class="control-label"> Pack Size</label>
+                                <div class="row">
+
+                                    <div class="col-md-2 ">
+                                        @*<label  class="control-label"> Pack</label>*@
+                                        <input id="Pack1" class="form-control" />
+                                        <input style="display:none" id="PackName" asp-for="PackSizeName" class="form-control" />
+                                        <span asp-validation-for="PackSizeName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a style="font-size:x-large">:</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        @*<label asp-for="PackQty" class="control-label">Quantity</label>*@
+                                        <input id="Pack2" class="form-control" />
+                                        <input style="display:none" id="PackQty" asp-for="PackQty" class="form-control" />
+                                        <span asp-validation-for="PackQty" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label asp-for="Remarks" class="control-label"></label>
+                                        <input readonly id="Pack3" asp-for="Remarks" class="form-control" />
+                                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" id="btnSubmit" value="Create" class="btn btn-default" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 table-responsive-md">
+                            @*<a class="btn btn-primary" asp-action="Create" asp-controller="Sales"><i class="fa fa-plus"></i></a>*@
+                            <br /><br />
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="background-color:burlywood">
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PackSizeName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PackQty)
+                                        </th>
+                                        @*<th>
+                                            @Html.DisplayNameFor(model => model.Remarks)
+                                        </th>*@
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in listofOption)
+                                    {
+
+                                        <tr id="row_@item.PackId">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PackSizeName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PackQty)
+                                            </td>
+                                            @*<td>
+                                                @Html.DisplayFor(modelItem => item.Remarks)
+                                            </td>*@
+
+                                            <td>
+                                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PackId"><i class="fa fa-edit"></i></a>
+                                                @*<a class="btn btn-danger" asp-action="Delete" id="dela" onchange="Delete()" asp-route-id="@item.PackId"><i class="fa fa-trash"></i></a>*@
+                                                <a class="text-danger btn btn-danger" onclick="ConfirmDelete(@item.PackId)"><i class="fa fa-trash"></i></a>
+                                          </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                            <h3 class="modal-title">Delete Department</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Are you sure to delete this.?</h4>
+                                            <div style="text-align:center;display:none" id="loaderDiv">
+                                                <img src="~/images/gif.png" style="height:200px; width:200px" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                            <a href="#" class="btn btn-success" onclick="DeleteDepartment()">Confirm</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hiddenPackId" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        // $("#btnSubmit").click(function () {
+        //    debugger
+        //    //$("#loaderDiv").show();
+
+        //    var data = $("#myForm").serialize();
+
+        //    $.ajax({
+
+        //        type: "POST",
+        //        url: "/Packs/Create",
+        //        data: data,
+        //        success: function (response) {
+        //            //$("#loaderDiv").hide();
+        //            alert("you are done");
+        //        }
+
+        //    })
+        //})
+        $(function () {
+       
+
+             $("#Pack1").change(function () {
+              SetPack();
+             });
+               $("#Pack2").change(function () {
+              SetPack();
+            });
+            function SetPack() {
+             var pack1=   $("#Pack1").val();
+                var pack2 = $("#Pack2").val();
+
+                $("#Pack3").val(pack1 + ':' + pack2);
+                $("#PackName").val(pack1 + ':' + pack2);
+                $("#PackQty").val(pack1 * pack2);
+            
+            }
+
+
+
+        });
+
+        var ConfirmDelete = function (PackId) {
+            $("#hiddenPackId").val(PackId);
+            $("#myModal").modal('show');
+        }
+        var DeleteDepartment = function () {
+            $("#loaderDiv").show();
+            var deptId = $("#hiddenPackId").val();
+            $.ajax({
+                type: "POST",
+                url: "/Packs/DeletePack",
+                data: { PackId: deptId },
+                success: function (result) {
+                    $("#loaderDiv").hide();
+                    $("#myModal").modal("hide");
+                    $("#row_" + deptId).remove();
+
+                }
+            })
+        }
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

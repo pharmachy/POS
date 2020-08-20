@@ -1,0 +1,36 @@
+﻿@model POS.Models.Department
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Department List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Delete Department</li>
+                </ol>
+            </nav>
+            <br /><br />
+            <h2 style="color:red">Are you sure to delete this Department? </h2>
+            <form method="post" asp-action="Delete">
+                <div class="form-group">
+
+                    <input asp-for="Name" class="font-weight-bolder" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-rounded btn-primary float-left"><i class="fa fa-save" style="margin-right:0.7em"></i>Delete</button>
+                    <a asp-action="Index" class="btn btn-rounded btn-success float-right"><i class="fa fa-angle-left" style="margin-right:0.7em"></i>Back</a>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

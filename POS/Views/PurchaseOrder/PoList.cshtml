@@ -1,0 +1,86 @@
+﻿@model IEnumerable<POS.Models.PO>
+
+@{
+    ViewData["Title"] = "PoList";
+}
+    <style>
+        #CustomCSS {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #CustomCSS td, #CustomCSS th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #CustomCSS tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #CustomCSS tr:hover {
+                background-color: #ddd;
+            }
+
+            #CustomCSS th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+    </style>
+<h2>PoList</h2>
+<p>
+    <a asp-action="Index">Create New</a>
+</p>
+<table id="CustomCSS" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryDate)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierId)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierId)
+            </td>*@
+            <td  >
+                <a @*asp-controller="Purchase"*@ asp-action="PurchaseByPO" asp-route-id="@item.PurchaseOrderId">Purchase</a> |
+                <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId">Edit</a> |
+                @*<a asp-action="Details" asp-route-id="@item.PurchaseOrderId">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

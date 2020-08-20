@@ -1,0 +1,73 @@
+﻿@model IEnumerable<POS.Models.BrandModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Model List</li>
+                        </ol>
+                    </nav>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-md-12 table-responsive-md">
+                            <a class="btn btn-xs btn-info float-right" asp-controller="BrandModel" asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Create</a><br />
+                            <br />
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr  style="background-color:burlywood">
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Remarks)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CreateDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Brand.BrandName)
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var c in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @c.Name
+                                            </td>
+                                            <td>
+                                                @c.Remarks
+                                            </td>
+                                            <td>
+                                                @c.CreateDate.ToString("dd/MM/yyyy")
+                                            </td>
+
+                                            <td>
+                                                @c.Brand.BrandName
+                                            </td>
+                                            <td>
+                                                <a class="text-primary btn btn-primary" asp-action="Edit" asp-route-id="@c.Id"><i class="fa fa-edit"></i>Edit</a>
+                                            </td>
+                                            <td><a class="text-danger btn btn-danger" asp-action="Delete" asp-route-id="@c.Id"><i class="fa fa-trash"></i>Delete</a></td>
+
+                                            @*<td>
+                                                <a asp-action="Edit" asp-route-id="@c.Id">Edit</a> |
+                                                <a asp-action="Details" asp-route-id="@c.Id">Details</a> |
+                                                <a asp-action="Delete" asp-route-id="@c.Id">Delete</a>
+                                            </td>*@
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            </div></div></div></div></div></div>

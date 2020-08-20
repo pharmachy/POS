@@ -1,0 +1,114 @@
+﻿@*@model POS.Models.Purchase*@
+@*@model POS.ViewModels.PurchaseVM*@
+@*@model IEnumerable<POS.ViewModels.PurchaseVM>
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.UnitPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.UnitPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.Discount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.Discount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.TotalPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.TotalPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.PurchaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.PurchaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Purchase.Product.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Purchase.PurchaseId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+
+
+@*@model POS.Models.Purchase*@
+@*@model POS.ViewModels.PurchaseVM*@
+@*@model IEnumerable<POS.ViewModels.PurchaseVM>*@
+@model POS.Models.Purchase
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

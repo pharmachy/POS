@@ -1,0 +1,284 @@
+﻿@model POS.Models.Supplier;
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<style>
+    .calCul {
+    }
+</style>
+
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div class="card">
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index">Supplier List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Supplier</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+@*<form class="form-style-9" asp-action="Create">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h2>Add new supplier </h2>
+        <hr style="background-color:cadetblue" />
+        <ul>
+            <li>
+                <h4><b>SL:</b></h4>
+                <input type="text" class="form-control" asp-for="Code" placeholder="Enter code" />
+
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Name:</b></h4>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Enter name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Contact:</b></h4>
+                <input type="number" class="form-control" asp-for="Contact" placeholder="Enter Contact number" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Email:</b></h4>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Enter Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Address Line 1:</b></h4>
+                <input type="text" class="form-control" asp-for="Address" placeholder="Enter Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Address Line 2:</b></h4>
+                <input type="text" class="form-control" asp-for="Address2" placeholder="Enter Address" />
+                <span asp-validation-for="Address2" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Contact Person:</b></h4>
+                <input type="text" class="form-control" asp-for="ContactPerson" placeholder="Enter Contact Person" />
+                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Contact Person Phone:</b></h4>
+                <input type="text" class="form-control" asp-for="Phone" placeholder="Enter Contact Person Phone" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </li>
+            <li>
+                <h4><b>Contact Person Email:</b></h4>
+                <input type="text" class="form-control" asp-for="CEmail" placeholder="Enter Contact Person Email" />
+                <span asp-validation-for="CEmail" class="text-danger"></span>
+            </li>
+            <li class="col-md-12">
+                <div class="col-md-5">
+                    <h4><b>Contact Person Address:</b></h4>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" asp-for="CAddress" placeholder="Enter Contact Person Address" />
+                    <span asp-validation-for="CAddress" class="text-danger"></span>
+                </div>
+            </li>
+            <li class="col-md-12">
+                <div class="col-md-6">
+                    <input type="submit" value="Save" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <a asp-action="Index" class="btn btn-warning form-control" id="bck">Back</a>
+                </div>
+            </li>
+
+            <li>
+
+            </li>
+
+        </ul>
+    </form>*@
+<br />
+<br />
+<form method="post" enctype="multipart/form-data" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <label asp-for="Code"></label>
+        </div>
+        <div class="form-group col-md-2">
+            <input asp-for="Code" class=" form-control" placeholder="Enter Supplier no." />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-1">
+            <label asp-for="Name"></label>
+        </div>
+        <div class="form-group col-md-2">
+            <input asp-for="Name" class=" form-control" placeholder="Enter Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label asp-for="Contact"></label>
+        </div>
+        @*<div class="form-group col-md-4">
+                <input asp-for="Contact" class=" form-control" placeholder="Enter Contact..." />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>*@
+        <div id="divCont" class="form-group col-md-3">
+
+            <div><input type="text" class=" form-control" placeholder="Enter Contact..." /><input type="button" onclick="AddTextBox()" value="Add" /></div>
+            <div><input id="allContact" type="text" asp-for="Contact" class="form-control" placeholder="Enter Contact..." /><input type="button" onclick="AddTextBox()" value="Add" /></div>
+
+        </div><br />
+        <div class="form-group col-md-2">
+            <label asp-for="Email"></label>
+        </div>
+        <div class="form-group col-md-3">
+            <input asp-for="Email" class=" form-control" placeholder="Enter Email..." />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label asp-for="Address"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Address" class="form-control" placeholder="Enter Supplier Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="Address2"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Address2" class="form-control" placeholder="Enter Supplier Address" />
+            <span asp-validation-for="Address2" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label asp-for="ContactPerson"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="ContactPerson" class=" form-control" placeholder="Enter NI No." />
+            <span asp-validation-for="ContactPerson" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="Phone"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="Phone" class=" form-control" placeholder="Enter Phone No." />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label asp-for="CEmail"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="CEmail" class=" form-control" placeholder="Enter Your Email" />
+            <span asp-validation-for="CEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="CAddress"></label>
+        </div>
+        <div class="form-group col-md-4">
+            <input asp-for="CAddress" class=" form-control" placeholder="Enter Your Email" />
+            <span asp-validation-for="CAddress" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-rounded btn-primary float-left form-control"><i class="fa fa-save" style="margin-right:0.7em"></i>Save</button>
+        </div>
+        <div class="col-md-6">
+            <a asp-action="Index" class="btn btn-rounded btn-success float-right form-control"><i class="fa fa-angle-left" style="margin-right:0.7em"></i>Back</a>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+    </div>
+</form>
+@section scripts{
+    <script src="~/Scripts/New1.js"></script>
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //   // $('input[type='text'] .greenIfNotEmpty')
+        //      $(".cal").change(function () {
+        //        debugger
+        //        //DataPass();
+        //    });
+
+        //});
+
+
+
+        //$(".cal").change(function () {
+        //       debugger
+        //       //DataPass();
+        //   });
+
+        function GetDynamicTextbox(value) {
+            debugger
+            return '<div><input  onchange="DataPass()" value="5" class="cal form-control" type="text"  /><input type="button" onclick="RemoveTextBox(this)" value="Remove" /></div>';
+
+        }
+           var inc = 0;
+        function AddTextBox() {
+            debugger
+            DataPass();
+            var div = document.createElement('DIV');
+
+            div.innerHTML = GetDynamicTextbox("");
+
+            document.getElementById("divCont").appendChild(div);
+         
+            inc++;
+
+        }
+       
+        var dataList = "";
+        function DataPass() {
+            debugger
+            var cal = document.getElementsByClassName(".cal").attr("value");
+            var dataList = cal;
+//          $("#Button").click(function() {
+//    var myElements = $(".class");
+//    for (var i=0;i<myElements.length;i++) {
+//        alert(myElements.eq(i).attr("name"));
+//    }
+//});
+          
+    var myElements = $(".cal");
+            for (var i = 0; i < myElements.length; i++) {
+                alert(myElements.eq(i).value);
+    }
+
+
+                $("#allContact").val(dataList);
+        
+           
+
+            //$.each(function () {
+            //    var data = $(".cal").val();
+
+            //   list =(data +",");
+            //});
+
+        }
+        function RemoveTextBox(div) {
+            debugger
+            document.getElementById("divCont").removeChild(div.parentNode.parentNode);
+
+        }
+
+    </script>
+}

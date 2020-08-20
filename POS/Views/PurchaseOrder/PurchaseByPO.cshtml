@@ -1,0 +1,384 @@
+﻿@model POS.Models.PO
+
+@{
+    ViewData["Title"] = "PurchaseByPO";
+}
+
+<style type="text/css">
+    .form-style-9 {
+        max-width: 1200px;
+        background: #FAFAFA;
+        padding: 30px;
+        margin: 50px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+    }
+
+        .form-style-9 ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+            .form-style-9 ul li {
+                display: block;
+                margin-bottom: 10px;
+                min-height: 35px;
+            }
+
+                .form-style-9 ul li .field-style {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    padding: 8px;
+                    outline: none;
+                    border: 1px solid #B0CFE0;
+                    -webkit-transition: all 0.30s ease-in-out;
+                    -moz-transition: all 0.30s ease-in-out;
+                    -o-transition: all 0.30s ease-in-out;
+                }
+
+                    .form-style-9 ul li .field-style:focus {
+                        box-shadow: 0 0 5px #B0CFE0;
+                        border: 1px solid #B0CFE0;
+                    }
+
+                .form-style-9 ul li .field-split {
+                    width: 49%;
+                }
+
+                .form-style-9 ul li .field-full {
+                    width: 100%;
+                }
+
+                .form-style-9 ul li input h5 .align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li input h5.align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li textarea {
+                    width: 100%;
+                    height: 100px;
+                }
+
+                .form-style-9 ul li input[type="button"],
+                .form-style-9 ul li input[type="submit"] {
+                    -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    background-color: #216288;
+                    border: 1px solid #17445E;
+                    display: inline-block;
+                    cursor: pointer;
+                    color: #FFFFFF;
+                    padding: 8px 18px;
+                    text-decoration: none;
+                    font: 12px Arial, Helvetica, sans-serif;
+                }
+
+                    .form-style-9 ul li input[type="button"]:hover,
+                    .form-style-9 ul li input[type="submit"]:hover {
+                        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+                        background-color: #28739E;
+                    }
+
+    #bck {
+        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+        background-color: #28739E;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style>
+@{    List<OrderDetailVM3> master = ViewBag.Master as List<OrderDetailVM3>;
+   // var master = ViewBag.Master;
+    @foreach (var item in  master)
+    {
+
+<h4>Order-No: @item.PurchaseOrderId || Supplier: @item.SupplierName || Order date: @item.OrderDate.ToString("dd-MM-yyyy")  || DeliveryDate : @item.DeliveryDate || Description: @item.Description</h4>
+        break;
+    }
+
+}
+@{
+    List<OrderDetailVM2> list = ViewBag.OderDetails as List<OrderDetailVM2>;
+    <div class="row">
+      
+        @*<div class="col-md-4">
+            <form class="form-style-9" asp-action="PurchaseByPO">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PurchaseOrderId" />
+                <div class="form-group">
+                    <label asp-for="PurchaseOrderNo" class="control-label"></label>
+                    <input asp-for="PurchaseOrderNo" class="form-control" />
+                    <span asp-validation-for="PurchaseOrderNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDate" class="control-label"></label>
+                    <input asp-for="OrderDate" class="form-control" />
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeliveryDate" class="control-label"></label>
+                    <input asp-for="DeliveryDate" class="form-control" />
+                    <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SupplierId" class="control-label"></label>
+                    <select style="pointer-events: none;" id="@ViewBag.Sid" type="number" placeholder="Quantity" asp-items="@ViewBag.SupplierId" asp-for="SupplierId" class="form-control"></select>
+
+                    <input asp-for="SupplierId" class="form-control" />
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>*@
+        <div class="col-md-12">
+            <div class="form-style-9">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                SubCategory
+                            </th>
+                            <th>
+                                Product
+                            </th>
+                            @*<th>
+                        @Html.DisplayNameFor(model => model.PO)
+                    </th>*@
+                            <th>
+                                Quantity
+                            </th>
+                            <th>
+                                Rate
+                            </th>
+
+                            @*<th>
+                        DiscountPer
+                    </th>*@
+                            <th>
+                                TotalAmount
+                            </th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in list)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </td>
+                                @*<td>
+                    @Html.DisplayFor(modelItem => item.PO.PurchaseOrderNo)
+                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rate)
+                                </td>
+
+                                @*<td>
+                    @Html.DisplayFor(modelItem => item.DiscountPer)
+                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                                </td>
+                                <td>
+                                    <a asp-action="OrderDetailsEdit" asp-route-id="@item.OrderDetailId">Edit</a> |
+                                    @*<a asp-action="Details" asp-route-id="@item.OrderDetailId">Details</a> |*@
+                                    <a asp-action="OrderDetailsDelete" asp-route-id="@item.OrderDetailId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+                <form asp-action="OrderDetailsCreate">
+                    <input type="hidden" asp-for="PurchaseOrderId" />
+                    <table class="table">
+                        <tbody>
+
+                            @*Start ADD*@
+                            <tr>
+                                <td class="col-md-2">
+                                    @*<div >
+                        <label>Category</label>*@
+                                    <select id="CategoryId" class="cr form-control">
+                                        <option value="0">--SELECT--</option>
+                                        @foreach (var b in ViewBag.CategoryId)
+                                        {
+                                            <option value="@b.Id">@b.Name</option>
+                                        }
+                                    </select>
+                                    @*</div>*@
+                                </td>
+                            </tr>
+                            <tr class="mycontainer" id="mainrow">
+
+                                <td class="col-md-2">
+                                    <select name="SubCategoryId" id="SubCategoryId" class="pc form-control" @*onchange="LoadProducts(this)"*@>
+                                        <option>Select</option>
+                                        @*@foreach (var b in ViewBag.CategoryId)
+                {
+                    <option value="@b.Id">@b.Name </option>
+                }*@
+                                    </select>
+                                    @*<span class="error">Select SubCategory</span>*@
+                                </td>
+                                <td class="col-md-2">
+                                    <select name="ProductId" id="product" class="product form-control">
+                                        <option>Select</option>
+                                        @*@foreach (var b in ViewBag.ProductId)
+                {
+                    <option value="@b.Id">@b.ProductName </option>
+                }*@
+                                    </select>
+                                    @*<span class="error">Select product</span>*@
+                                </td>
+                                <td class="col-md-1">
+                                    <input type="text" name="Quantity" onchange="Dis()" id="quantity" class="quantity form-control" />
+                                    @*<span class="error">Valid quantity required</span>*@
+                                </td>
+                                <td class="col-md-1">
+                                    <input type="text" name="Rate" onchange="Dis()" id="rate" class="rate form-control" />
+                                    @*<span class="error">Valid rate required</span>*@
+                                </td>
+                                @*<td>
+            <input type="text" id="discount" class="discount form-control" />
+
+        </td>*@
+                                <td class="col-md-2">
+                                    <input readonly name="TotalAmount" type="text" id="total" class="total form-control" />
+
+                                </td>
+                                <td class="col-md-2"></td>
+                                <td>
+                                    <input type="submit" id="add" value="add" style="width:80px" class="btn btn-success" />
+                                </td>
+                            </tr>
+
+                            @*Eend ADD*@
+                        </tbody>
+                    </table>
+                </form>
+                <form asp-action="PurchaseByPO">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="PurchaseOrderId" />
+                    <div class="form-group">
+                        <input asp-route-id="@Model.PurchaseOrderId" type="submit" value="Purchase Confirm" class="btn btn-default" />
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+
+     $(function () {
+        $('#orderDate').datepicker({
+            dateFormat: 'mm-dd-yy'
+        });
+        $('#DeliveryDate').datepicker({
+            dateFormat: 'mm-dd-yy'
+        });
+
+         //20Aprill
+
+    $("#CategoryId").change( function () {
+        var a = $("#CategoryId option:selected").text();
+        $("#SubCategoryId").empty();
+        $("#SubCategoryId").append('<option value="0">--SELECT--</option>')
+        debugger
+        var catId = $("#CategoryId").val();
+
+        debugger
+        var json = { CategoryId: catId };
+        //var json = JSON.stringify( { CategoryId: catId });
+
+        $.ajax({
+            type: "POST",
+            //url: '/Products/GetCatList',
+            url: '@Url.Action("GetCatList","Products")',
+            //contentType: "application/json; charset=utf-8",
+            // dataType: "json",
+            data: json,
+
+            success: function (data) {
+                $.each(data, function (key, value) {
+
+                    $("#SubCategoryId").append("<option value='" + value.Id + "'>" + value.Name + "</option>")
+                });
+            }
+        });
+    });
+         $("#SubCategoryId").change(function () {
+               debugger
+             LoadProducts();
+         });
+         //fetch products
+function LoadProducts(categoryId) {
+    $.ajax({
+        type: "GET", 
+        url: "/PurchaseOrder/GetProductList",
+        data: { 'SubCategoryId': $("#SubCategoryId").val() },
+        success: function (data) {
+            //render products to appropriate dropdown
+               $.each(data, function (key, value) {
+
+                    $("#product").append("<option value='" + value.Id + "'>" + value.ProductName + "</option>")
+                });
+         
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}
+
+     
+    $("#rate").change(function () {
+
+        Dis();
+    });
+  
+ 
+    function Dis() {
+
+        var Quantity = $("#quantity").val();
+        var rate = $("#rate").val();
+        var cashValue = parseFloat(Quantity) * parseFloat(rate);
+        //var DiscountPer = $("#discount").val();
+        //var DisPer = DiscountPer / 100;
+        //var Total = cashValue * (1 - DisPer) ;
+       // var Total = cashValue;  /* - parseFloat(cashValue);*/
+        debugger
+        $("#total").val(cashValue);
+    }
+
+    });
+</script>

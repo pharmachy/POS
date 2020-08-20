@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>POS</title>
+
+    @*<link rel="shortcut icon" href="~/Content/Background/favicon.ico" type="image/x-icon" />*@
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css">
+    @*<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">*@
+    @*<link href="~/css/style1.css" rel="stylesheet" />*@
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/onsen/2.10.6/css/ionicons/css/ionicons.min.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/css/skins/_all-skins.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js">*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2-bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">*@
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>*@
+    <link href="~/Style/bootstrap3-wysihtml5.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    @*<link href="~/css/style1.css" rel="stylesheet" />*@
+    <!--datatables.net-->
+    <link rel="stylesheet" href="~/lib/DataTables/datatables.min.css" />
+    <!--datatables.net-->
+    <!--jquery numpad-->
+    <link rel="stylesheet" href="~/lib/jquerey-numpad/jquery.numpad.css" />
+    <!--jquery numpad-->
+    <!--toastr-->
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <!--toastr-->
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!--End new Database-->
+    @RenderSection("styles", required: false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            @*@if (User.Identity.Name == "User")
+                {
+                    <a href="~/Transaction/RecepientGroupWiseSummary" class="logo">
+                        <span class="logo-mini"><b>Zakat</b></span>
+                        <span class="logo-lg"><b>Zakat App</b></span>
+                    </a>
+                }
+                else
+                {
+                    <a href="~/Home/Index" class="logo">
+                        <span class="logo-mini"><b>Zakat</b></span>
+                        <span class="logo-lg"><b>Zakat App</b></span>
+                    </a>
+                }*@
+            <a href="~/Home/Index" class="logo">
+                <span class="logo-mini"><b>POS</b></span>
+                <span class="logo-lg"><b>POS</b></span>
+            </a>
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                @if (User.Identity.Name == "Admin")
+                {
+                    <a href="~/Home/Index" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                }
+
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-dark"><b>@DateTime.Now.ToString("d")</b></a>
+
+                        </li>
+                        <li class="dropdown user user-menu">
+
+                            <a href="#" class="dropdown-toggle loginUser" data-toggle="dropdown">
+                                <img src="~/images/MiniNoPic.jpg" class="user-image" alt="User Image" />
+                                <span class="hidden-xs">
+                                    Profile @User.Identity.Name
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="~/images/MiniNoPic.jpg" class="img-circle" alt="User Image" />
+                                    <p>@User.Identity.Name</p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Sign in</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a asp-action="logout" asp-controller="Account" class="btn btn-default btn-flat">
+                                            Sign up
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        @if (User.Identity.Name == "Admin")
+        {
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header" style="text-align:center;color:deepskyblue"><b>MENU</b></li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>Settings</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/about_zakat/Index"><i class="fa fa-files-o"></i>About Zakat</a></li>
+                                <li><a href="/Abouts/Index"><i class="fa fa-files-o"></i>About CZM</a></li>
+                                <li><a href="/programs/Index"><i class="fa fa-files-o"></i>Programs</a></li>
+                                <li><a href="/success_story/Index"><i class="fa fa-files-o"></i>Success Story</a></li>
+                                <li><a href="/Hadith_Class/Index"><i class="fa fa-files-o"></i>Hadith</a></li>
+                                <li class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-files-o"></i>
+                                        <span>Zakat Recipient</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="/Recepient/Index"><i class="fa fa-circle-o"></i>Create Recipient</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>Disbursement</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Transaction/Disburse"><i class="fa fa-circle-o"></i>Disburse Zakat</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>Report</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Transaction/PaymentList"><i class="fa fa-circle-o"></i>Collection Report</a></li>
+                                <li><a href="/Report/DisburseReport"><i class="fa fa-circle-o"></i>Disbursement Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+        }
+
+
+        @*@if (User.Identity.Name == "User")
+            {*@
+        <a href="~/Home/Index" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree">
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Settings</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Departments</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Dept/Index">Department</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Category/Index">Category</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/SubCategory/Index">Sub Category</a></li>
+
+                                    @*<li style="text-align:left;color:deepskyblue"><a href="/Customer/Index">Customer</a></li>*@
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Supplier</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Sup/Index">Supplier</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/TestChilds/CreateA">SupplierA</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Company/Index">Manufacturer</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Customer</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Customer/Index">Customer</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Purchase</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Purchase/Index">Purchase</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Purchase/AllViewList">Purchase List</a></li>
+
+                                </ul>
+                            </li> 
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>PO</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                 
+                                    <li style="text-align:left;color:deepskyblue"><a href="/PurchaseOrder/Index">PO</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/PurchaseOrder/PoList">PO List</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Sales</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Sales/Index">Sale</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-files-o"></i>
+                                    <span>Product</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Products/Index">Product List</a></li>
+                                    @*<li style="text-align:left;color:deepskyblue"><a href="/Category/Index">Category</a></li>
+        <li style="text-align:left;color:deepskyblue"><a href="/SubCategory/Index">Sub Category</a></li>*@
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Brand/Create">Brand</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/BrandModel/Create">Model</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Packs/Create">Pack</a></li>
+                                    <li style="text-align:left;color:deepskyblue"><a href="/Unit/Create">Unit</a></li>
+                                </ul>
+                            </li>
+                            @*<li style="text-align:left;color:deepskyblue"><a href="/Brand/Create">Brand</a></li>
+                            <li style="text-align:left;color:deepskyblue"><a href="/BrandModel/Create">Model</a></li>
+                            <li style="text-align:left;color:deepskyblue"><a href="/Packs/Create">Pack</a></li>
+                            <li style="text-align:left;color:deepskyblue"><a href="/Unit/Create">Unit</a></li>*@
+                            @*<li style="text-align:left;color:deepskyblue"><a href="/PurchaseOrder/Index">PO</a></li>*@
+
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        @*}*@
+
+
+        <div class="content-wrapper">
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+        <footer class="main-footer">
+            <strong>&copy; <a href="#">Optimum Solution and Services Ltd</a></strong>
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+     @*<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>*@   
+
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>*@
+
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/1.2.2/jquery-jvectormap.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/1.2.2/jquery-jvectormap.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.12/jquery.knob.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>*@
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.11.2/ckeditor.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/js/adminlte.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/js/demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    @*<script src="~/Scripts/jquery.tabletojson.js"></script>*@
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>*@
+
+
+    @* <script src="~/style/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>*@
+    <script src="~/Style/bootstrap3-wysihtml5.all.js"></script>
+    <script src="~/js/script1.js"></script>
+    <!--datatables.net-->
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+    <!--datatables.net-->
+    <!--axios-->
+    <script src="~/lib/axios/axios.min.js"></script>
+    <!--axios-->
+    <!--jquery numpad-->
+    <script src="~/lib/jquerey-numpad/jquery.numpad.js"></script>
+    <!--jquery numpad-->
+    <!--toastr-->
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <!--toastr-->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <style>
+        .linkPointer:hover {
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.textarea').wysihtml5()
+            $('.datePicker').datepicker({
+                format: "yyyy/m/d",
+                autoclose: true
+            });
+
+
+            $("#tableX").DataTable({
+                "bDeferRender": true
+            })
+
+            $("#tableY").DataTable({
+                "bDeferRender": true
+                // "order": ASC
+            })
+            $('.searchingDropdown').select2();
+
+
+        })
+
+
+
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

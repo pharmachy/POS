@@ -1,0 +1,283 @@
+﻿@model POS.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="col-md-12 grid-margin stretch-card">
+    @*<input type="hidden" name="Category" id="hdnCategoryId" />*@
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Product List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Product</li>
+                </ol>
+            </nav>
+            <br /><br />
+
+            <form asp-action="Create" method="Post" enctype="multipart/form-data" style="border:groove;margin-right:20px;">
+                <br />
+                <div class="p-4 rounded border">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div>
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2 ">
+                                    <label asp-for="ProductName"></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input asp-for="ProductName" class="form-control" />
+                                </div>
+                                <span asp-validation-for="ProductName" class="text-danger col-md-4"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label asp-for="CompanyId"></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select asp-for="CompanyId" asp-items="ViewBag.CompanyId" class="form-control">
+                                    </select>
+                                </div>
+                                <span asp-validation-for="CompanyId" class="text-danger col-md-4"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label>Brand</label>
+                                </div>
+                                <div class="col-md-4">
+                                    @*<select  asp-items="ViewBag.BrandIdd" class="form-control">
+                                    </select>*@
+                                    <select id="BrandId" name="BrandId" class="form-control">
+                                        <option value="">--Select-- </option>
+                                        @*@foreach (var b in ViewBag.BrandIdd)
+                                        {
+                                            <option value="@b.Id">@b.BrandName </option>
+                                        }*@
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label asp-for="BrandModelId"></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="BrandModelId" asp-for="BrandModelId"  asp-items="ViewBag.BrandModelId" class="form-control">
+                                        <option value="">--SELECT--</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="BrandModelId" class="text-danger"></span>
+                                @*<span asp-validation-for="SubCategoryId" class="text-danger"></span>*@
+                            </div>
+                        </div>
+
+                        @*<div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label asp-for="BrandModelId"></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select asp-for="BrandModelId" asp-items="ViewBag.BrandModelId" class="form-control">
+                                    </select>
+                                </div>
+                                <span asp-validation-for="BrandModelId" class="text-danger"></span>
+                            </div>
+                        </div>*@
+                        @*//-Kazi----*@
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label>Category</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="CategoryId" name="CategoryId" class="form-control">
+                                        <option value="">--Select-- </option>
+                                        @foreach (var cat in ViewBag.CategoryId)
+                                        {
+                                            <option value="@cat.Id">@cat.Name </option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label asp-for="SubCategoryId"></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="SubCategoryId" asp-for="SubCategoryId"  asp-items="ViewBag.SubCategoryId"  class="form-control">
+                                        <option value="">--SELECT--</option>
+                                    </select>
+                                </div>
+                                @*<span asp-validation-for="SubCategoryId" class="text-danger"></span>*@
+                            </div>
+                        </div>
+                        @*//-----*@
+                        @*<div class="form-group row">
+            <div class="col-md-10">
+                <div class="col-md-2">
+                    <label asp-for="SubCategoryId"></label>
+                </div>
+                <div class="col-md-5">
+                    <select id="SubCategoryId" asp-for="SubCategoryId" class="form-control">
+                        <option value="">--SELECT--</option>
+                    </select>
+                </div>
+                <span asp-validation-for="SubCategoryId" class="text-danger"></span>
+            </div>
+        </div>*@
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2 ">
+                                    <label asp-for="UnitId"></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select asp-for="UnitId" asp-items="ViewBag.UnitId" class="form-control">
+                                    </select>
+                                </div>
+                                <span asp-validation-for="UnitId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @*<div class="form-group row">
+            <div class="col-md-10">
+                <div class="col-md-2">
+                    <label asp-for="ProductImage"></label>
+                </div>
+                <div class="col-md-5">
+                    <input asp-for="ProductImage" name="ProductImage" class="form-control" type="file" />
+                </div>
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
+            </div>
+        </div>*@
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <div class="col-md-2 ">
+                                    <label asp-for="Description"></label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input asp-for="Description" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Description" class="text-danger col-md-4"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Save" />
+                            <a asp-action="Index" class=" btn btn-primary">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+
+    <script>
+       $( document ).ready(function() {
+
+
+
+            $('#CategoryId').select2().on("select2-selecting", function (e) { }).on("change", function (e) { });
+            $('#BrandId').select2().on("select2-selecting", function (e) { }).on("change", function (e) { });
+            $('#CompanyId').select2().on("select2-selecting", function (e) { }).on("change", function (e) { });
+
+
+
+            $("#CategoryId").on("change", function () {
+                var a = $("#CategoryId option:selected").text();
+                $("#SubCategoryId").empty();
+                $("#SubCategoryId").append('<option value="">--SELECT--</option>')
+                  debugger
+                //$("#hdnCategoryId").val(a);
+                var catId = $("#CategoryId").val();
+                //var cc = parseFloat(catId);
+                  debugger
+                var json = { CategoryId: catId };
+                //var json = JSON.stringify( { CategoryId: catId });
+
+                $.ajax({
+                    type: "POST",
+                    //url: '/Products/GetCatList',
+                    url: '@Url.Action("GetCatList","Products")',
+                     //contentType: "application/json; charset=utf-8",
+                     // dataType: "json",
+                    data:json,
+                     
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            //alert(value.Name);
+                        $("#SubCategoryId").append("<option value='" + value.Id + "'>" + value.Name + "</option>")
+                    });
+                    }
+                });  
+            });
+
+              $("#CompanyId").on("change", function () {
+                var a = $("#BrandId option:selected").text();
+                $("#BrandId").empty();
+                $("#BrandId").append('<option value="">--SELECT--</option>')
+                  debugger
+                var catId = $("#CompanyId").val();
+
+                  debugger
+                var json = { CompanyId: catId };
+                //var json = JSON.stringify( { CategoryId: catId });
+
+                $.ajax({
+                    type: "POST",
+                    //url: '/Products/GetCatList',
+                    url: '@Url.Action("GetBrandList","Products")',
+                     //contentType: "application/json; charset=utf-8",
+                     // dataType: "json",
+                    data:json,
+                     
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                           //alert(value.Name);
+                        $("#BrandId").append("<option value='" + value.Id + "'>" + value.BrandName + "</option>")
+                    });
+                    }
+                });  
+            });
+
+            $("#BrandId").on("change", function () {
+                var a = $("#BrandId option:selected").text();
+                $("#BrandModelId").empty();
+                $("#BrandModelId").append('<option value="">--SELECT--</option>')
+                  debugger
+                var catId = $("#BrandId").val();
+
+                  debugger
+                var json = { BrandId: catId };
+                //var json = JSON.stringify( { CategoryId: catId });
+
+                $.ajax({
+                    type: "POST",
+                    //url: '/Products/GetCatList',
+                    url: '@Url.Action("GetModelList","Products")',
+                     //contentType: "application/json; charset=utf-8",
+                     // dataType: "json",
+                    data:json,
+                     
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                           //alert(value.Name);
+                        $("#BrandModelId").append("<option value='" + value.Id + "'>" + value.Name + "</option>")
+                    });
+                    }
+                });  
+            });
+
+
+
+
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

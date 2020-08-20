@@ -1,0 +1,193 @@
+﻿@model IEnumerable<POS.Models.TestChild>
+
+@{
+    ViewData["Title"] = "AddBar";
+}
+
+@*<!DOCTYPE html>
+    <h2>AddBar</h2>
+
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+            <title>Index</title>
+            <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+            <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+    </head>*@
+<div class="col-md-6 table-responsive-md">
+
+    <table id="tblSkills" cellpadding="0" cellspacing="0" class="table table-responsive">
+        <thead>
+            <tr>
+                <th style="width:150px"> Name</th>
+                <th style="width:150px">Age</th>
+                <th style="width:150px">TestParentId</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><input type="text" id="Name" /></td>
+                <td><input type="number" id="Age" /></td>
+                <td><input type="number" id="TestParentId" /></td>
+                <td>
+                    <input type="button" id="btnAdd" class="btn btn-success btn-sm" value="Add" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <br />
+    <input type="button" id="btnSave" value="SaveAll" class="bnt btn-block btn-success" />
+
+    <br />
+    @*<table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th style="width:200px">Skill Name</th>
+                <th>Value</th>
+                <th style="width:200px"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null)
+            {
+
+
+                foreach (POS.Models.TestChild c in Model)
+                {
+                    <tr>
+                        <td>@c.Name</td>
+                        <td>@c.Age</td>
+
+                        <td>
+
+                            <span class="progress">
+                                <span class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="@c.Name" aria-valuemin="0" aria-valuemax="100" style="width:@c.Name%">
+                                    @c.Name %
+                                </span>
+                            </span>
+
+
+                        </td>
+                        <td>
+                            <input type="button" value="Remove" class="btn btn-danger btn-sm" onclick="Remove(this)" />
+                        </td>
+                    </tr>
+                }
+
+
+            }
+    </table>*@
+
+</div>
+
+
+@section scripts{
+
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+      <script type="text/javascript">
+        $("body").on("click", "#btnAdd", function () {
+
+            var Name = $("#Name");
+            var Age = $("#Age");
+            //  var Name = $("#Name").val();
+            //var Age = $("#Age").val();
+            var TestParentId = $("#TestParentId");
+
+            var tBody = $("#tblSkills > TBODY")[0];
+
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Namecell.
+            var cell = $(row.insertCell(-1));
+            cell.html(Name.val());
+            // cell.html(Name);
+
+            //Add Countrycell.
+            cell = $(row.insertCell(-1));
+            cell.html(parseFloat(Age.val()));
+            // cell.html(Age);
+
+            //Add Countrycell.
+            cell = $(row.insertCell(-1));
+            cell.html(parseFloat(TestParentId.val()));
+            //cell.html(TestParentId);
+
+            //Add Buttoncell.
+            cell = $(row.insertCell(-1));
+            var btnRemove = $("<input/>");
+            btnRemove.attr("type", "button");
+            btnRemove.attr("onclick", "Remove(this);");
+            btnRemove.attr("class", "btn btn-danger btn-sm")
+            btnRemove.val("x");
+            cell.append(btnRemove);
+
+            //Clear theTextBoxes.
+            Name.val("");
+            Age.val("");
+            TestParentId.val("");
+            //  Name="";
+            // Age="";
+            //TestParentId="";
+        });
+
+        function Remove(button) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(0).html();
+            if (confirm("Do you want to delete:" + name)) {
+                //Get thereference of the Table.
+                var table = $("#tblSkills")[0];
+
+                //Deletethe Table row using it's Index.
+                table.deleteRow(row[0].rowIndex);
+            }
+        };
+
+        $("body").on("click", "#btnSave", function () {
+            //Loop throughthe Table rows and build a JSON array.
+            var skills = new Array();
+            $("#tblSkills").find("tr:gt(0)").each(function () {
+                debugger
+                var row = $(this);
+                var skill = {};
+                skill.Name = row.find("TD").eq(0).text();
+                skill.Age = row.find("TD").eq(1).text();
+                skill.TestParentId = row.find("TD").eq(2).val();
+                //alert(skill.Name + "ddd")
+                debugger
+                if (skill.Name != "") {
+                       skills.push(skill);
+                }
+             
+            });
+            console.log(skills);
+            alert(skills.Name + " record(s) inserted.");
+
+            //Send the JSONarray to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "/TestChilds/InsertSkills",
+                data: skills,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                    location.reload();
+                }
+            });
+        });
+    </script>
+
+}
+
+
+

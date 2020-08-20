@@ -1,0 +1,80 @@
+﻿@model POS.Models.Supplier
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+
+<link href="~/css/style.css" rel="stylesheet" />
+
+
+<form class="form-style-9" asp-action="Delete">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id"/>
+    <h2 style="color:red">Are you sure to delete Supplier?</h2>
+    <hr style="background-color:cadetblue" />
+    <ul>
+        <li>
+            <h4><b>SL/Supplier No:</b></h4>
+            <input type="text" class="form-control" asp-for="Code" readonly />
+
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Name:</b></h4>
+            <input type="text" class="form-control" asp-for="Name" readonly />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Contact:</b></h4>
+            <input type="number" class="form-control" asp-for="Contact" readonly />
+            <span asp-validation-for="Contact" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Email:</b></h4>
+            <input type="email" class="form-control" asp-for="Email" readonly />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Address Line 1:</b></h4>
+            <input type="text" class="form-control" asp-for="Address" readonly />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Address Line 2:</b></h4>
+            <input type="text" class="form-control" asp-for="Address2" readonly />
+            <span asp-validation-for="Address2" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Contact Person:</b></h4>
+            <input type="text" class="form-control" asp-for="ContactPerson" readonly />
+            <span asp-validation-for="ContactPerson" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Phone:</b></h4>
+            <input type="text" class="form-control" asp-for="Phone" readonly />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Email:</b></h4>
+            <input type="text" class="form-control" asp-for="CEmail" readonly />
+            <span asp-validation-for="CEmail" class="text-danger"></span>
+        </li>
+        <li>
+            <h4><b>Contact Person Address:</b></h4>
+            <input type="text" class="form-control" asp-for="CAddress" readonly />
+            <span asp-validation-for="CAddress" class="text-danger"></span>
+        </li>
+        <li class="col-md-12">
+            <div class="col-md-6">
+                <input type="submit" value="Delete" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Index" class="btn btn-warning form-control" id="bck">Back</a>
+            </div>
+        </li>
+        <li></li>
+    </ul>
+</form>

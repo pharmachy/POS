@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewData["Title"] = "Demo";
+}
+
+<h2>Demo</h2>
+
+@{
+    ViewData["Title"] = "Manage Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var tdId = "tdId";
+}
+@*@model Erp.Core.Services.Merchandising.VMOrder*@
+<style type="text/css">
+    .box-header > .box-tools {
+        position: absolute;
+        left: 10px;
+        top: 5px;
+    }
+
+    .customTable,
+    .table > tbody > tr > td,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > td,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > thead > tr > th {
+        padding: 3px !important;
+    }
+
+    .trclass {
+        border: 1px solid thick;
+        font-size: 12px;
+        font-weight: 700;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <section class="content-header">
+            <h1>
+                Manage Pruchase Order
+            </h1>
+            <ol class="breadcrumb">
+                <li><a asp-action="Index" asp-controller="Home"><i class="fa fa-dashboard"></i>Home</a></li>
+                <li class="active">Order</li>
+            </ol>
+        </section>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="box collapsed-box box-success" id="open">
+                    <div class="box-header">
+                        <h4 class="box-title">.</h4>
+                        <div class="box-tools" id="btncollapse">
+                            <button type="button" class="btn btn-block btn-primary" data-widget="collapse">
+                                <i id="iconName" class="fa fa-plus circle"></i> Buyer Order
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display:none">
+                        <div id="updateForm"></div>
+                        <div id="createForm">
+                            @*@await Component.InvokeAsync("CommonUI", new { id = 0, oid = 0, name = "Order" })*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="box box-success">
+            <div class="box-header custom bg-success">
+                <h4>
+                    Buyer Order:
+                </h4>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <!--Body Will by Start Here-->
+                <div class="table-responsive">
+                    <table id="tableABC" class="table table-striped text-nowrap">
+                        <thead>
+                            <tr class="bg-success">
+                                <th>SL</th>
+                                <th>Name</th>                                
+                                <th>Order ID</th>                                
+                                <th>Supplier Name</th>                                
+                                <th>PO Date</th>
+                                <th>Agent Name</th>                               
+                                <th>Order Value</th>
+                                <th>Remarks</th>
+                                <th class="center">Action</th>
+                            </tr>
+                        </thead>
+                        @*@{int sl = 0;
+                        }*@
+                        <tbody>
+                            @*@foreach (var item in Model.DataList)
+                            {
+                                <tr>
+                                    <td>@(++sl)</td>
+                                    <td>@item.User</td>
+                                    <td id="@tdId@item.ID" class="hidden">@item.ID</td>
+                                    <td><a href="@Url.Action("OrderView","Merchandising",new { Id=item.ID })" class="linkPointer" title="Details" data-placement="top">@item.CID</a></td>
+                                    <td>@item.BuyerPO</td>
+                                    <td>@item.BuyerName</td>
+                                    <td>@item.Season</td>
+                                    <td>@item.OrderDate.ToString("yyyy/MM/dd")</td>
+                                    <td>@item.Agent</td>
+                                    <td>@item.InspectionAgent</td>
+                                    <td style="text-align:center;">@item.Commission</td>
+                                    <td style="text-align:right;">$@item.BuyerPOValue</td>
+                                    <td>@item.Remarks</td>
+                                    <td>
+                                        <a data-modal="" class="linkPointer" asp-action="CreateForm" asp-controller="Merchandising" asp-route-Id="@item.ID" asp-route-VId="Order"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a> &nbsp;
+                                        @if (!item.IsReference)
+                                        {
+                                            <a onclick="deleteItemInfo(@item.ID);" class="linkPointer" data-toggle="modal" data-target="#deleteModal" title="Delete" data-placement="top"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box">
+        @using (Html.BeginForm("Order", "Merchandising", FormMethod.Post, new { id = "formData", @class = "formValidator" }))
+        {
+            @*@Html.HiddenFor(model => model.ID, new { id = "DeleteId" })
+            @Html.HiddenFor(model => model.ActionId, new { id = "DeleteActionId" })*@
+            <div class="modal fade" id="deleteModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                                &times;
+                            </button>
+                            <h5 class="modal-title"><b>Order Delete</b></h5>
+                        </div>
+                        <div class="modal-body">
+                            <div style="text-align:center">
+                                <h3>Are you sure to delete?</h3>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btncloseandreset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" id="btnsave" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Delete</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.formValidator').bootstrapValidator();
+            $('.searchingDropdown').select2();
+        });
+
+        function deleteItemInfo(id) {
+            if (id !== null) {
+                $('#DeleteId').val(id);
+                $('#DeleteActionId').val(3);
+            }
+        }
+
+        $("#btncloseandreset").click(function (e) {
+            $('#hidId').empty();
+            $('#ActionId').val(1);
+            $('#btnsave').html("<i class='fa fa-floppy-o'></i>&nbsp;Save");
+
+        })
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+
+            $("a[data-modal]").on("click", function (e) {
+
+                $('#updateForm').load(this.href);
+                $('#createForm').remove();
+
+                $("#open").removeClass('collapsed-box');
+                $('.box-body').css("display", "block")
+                $("#iconName").addClass('fa-minus');
+
+                return false;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<POS.Models.Pack>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"></a>Home</li>
+                        <li class="breadcrumb-item active" aria-current="page">Pack List</li>
+                    </ol>
+                </nav>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12 table-responsive-md">
+                        <a class="btn btn-primary" asp-action="Create" asp-controller="Sales"><i class="fa fa-plus"></i></a>
+                        <br /><br />
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="background-color:burlywood">
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PackSizeName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PackQty)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Remarks)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PackSizeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PackQty)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PackId"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PackId"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

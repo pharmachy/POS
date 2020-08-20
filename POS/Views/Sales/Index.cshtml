@@ -1,0 +1,60 @@
+﻿@model IEnumerable<POS.ViewModels.SaleVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"></a>Home</li>
+                        <li class="breadcrumb-item active" aria-current="page">Sale List</li>
+                    </ol>
+                </nav>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12 table-responsive-md">
+                        <a class="btn btn-primary" asp-action="Create" asp-controller="Sales"><i class="fa fa-plus"></i></a>
+                        <br/><br/>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="background-color:#0094ff">
+
+                                    <th>Product Name</th>
+                                    <th>Sale Date</th>
+                                    <th>Quantity</th>
+                                    <th>Sales Price</th>
+                                    <th>Discount (%)</th>
+                                    <th>Discount Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>@Html.DisplayFor(x=>item.ProductName)</td>
+                                        <td>@item.Sales_Date.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Sales_price</td>
+                                        <td>@item.Discount</td>
+                                        <td>@item.DicountPrice</td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>             
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

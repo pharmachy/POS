@@ -1,0 +1,178 @@
+﻿@model POS.Models.OrderDetail
+
+@{
+    ViewData["Title"] = "OrderDetailsEdit";
+}
+
+<style type="text/css">
+    .form-style-9 {
+        max-width: 450px;
+        background: #FAFAFA;
+        padding: 10px;
+        margin: 5px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+    }
+
+        .form-style-9 ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+            .form-style-9 ul li {
+                display: block;
+                margin-bottom: 10px;
+                min-height: 35px;
+            }
+
+                .form-style-9 ul li .field-style {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    padding: 8px;
+                    outline: none;
+                    border: 1px solid #B0CFE0;
+                    -webkit-transition: all 0.30s ease-in-out;
+                    -moz-transition: all 0.30s ease-in-out;
+                    -o-transition: all 0.30s ease-in-out;
+                }
+
+                    .form-style-9 ul li .field-style:focus {
+                        box-shadow: 0 0 5px #B0CFE0;
+                        border: 1px solid #B0CFE0;
+                    }
+
+                .form-style-9 ul li .field-split {
+                    width: 49%;
+                }
+
+                .form-style-9 ul li .field-full {
+                    width: 100%;
+                }
+
+                .form-style-9 ul li input h3 .align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li input h3.align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li textarea {
+                    width: 100%;
+                    height: 100px;
+                }
+
+                .form-style-9 ul li input[type="button"],
+                .form-style-9 ul li input[type="submit"] {
+                    -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    background-color: #216288;
+                    border: 1px solid #17445E;
+                    display: inline-block;
+                    cursor: pointer;
+                    color: #FFFFFF;
+                    padding: 8px 18px;
+                    text-decoration: none;
+                    font: 12px Arial, Helvetica, sans-serif;
+                }
+
+                    .form-style-9 ul li input[type="button"]:hover,
+                    .form-style-9 ul li input[type="submit"]:hover {
+                        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+                        background-color: #28739E;
+                    }
+
+    #bck {
+        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+        background-color: #28739E;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style> 
+<h2>OrderDetailsEdit</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form class="form-style-9" asp-action="OrderDetailsEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderDetailId" />
+            <div class="form-group" style="display:none">
+                <label asp-for="PurchaseOrderId" class="control-label"></label>
+                <input asp-for="PurchaseOrderId" class="form-control" />
+                <span asp-validation-for="PurchaseOrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="SubCategoryId" class="control-label"></label>
+                <select asp-for="SubCategoryId" asp-items="ViewBag.SubCategoryId" class="form-control"></select>
+                <span asp-validation-for="SubCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="ProductId" class="control-label"></label>
+                @*<input asp-for="ProductId"  class="form-control" />*@
+                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" id="quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate" class="control-label"></label>
+                <input asp-for="Rate" onchange="Dis()" id="rate" class="form-control" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" id="total" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="DiscountPer" class="control-label"></label>
+                <input asp-for="DiscountPer" class="form-control" />
+                <span asp-validation-for="DiscountPer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    $(function () {
+
+        $("#quantity").change(function () {
+
+            Dis();
+        }); $("#rate").change(function () {
+
+            Dis();
+        });
+
+
+        function Dis() {
+
+            var Quantity = $("#quantity").val();
+            var rate = $("#rate").val();
+            var cashValue = parseFloat(Quantity) * parseFloat(rate);
+            //var DiscountPer = $("#discount").val();
+            //var DisPer = DiscountPer / 100;
+            //var Total = cashValue * (1 - DisPer) ;
+            // var Total = cashValue;  /* - parseFloat(cashValue);*/
+            debugger
+            $("#total").val(cashValue);
+        }
+    });
+
+</script>

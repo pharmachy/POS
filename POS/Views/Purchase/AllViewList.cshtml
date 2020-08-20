@@ -1,0 +1,140 @@
+﻿@*@model POS.Models.Purchase
+    @using POS.ViewModels*@
+@model IEnumerable<POS.ViewModels.PurchaseVM>
+
+@{
+    ViewData["Title"] = "Purchase Product Details List";
+}
+<style>
+    #CustomCSS {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #CustomCSS td, #CustomCSS th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #CustomCSS tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #CustomCSS tr:hover {
+            background-color: #ddd;
+        }
+
+        #CustomCSS th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>
+<h2>Purchase List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="CustomCSS" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Product.Unit)
+                </th>*@
+
+            <th>
+             Model
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandModel.Brand.BrandName)
+            </th>
+            <th>
+            Manufaturer
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase.UnitPrice)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Purchase.Discount)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase.PurchaseDate)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Purchase.PurchaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchase.PurchaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchase.PurchaseDate)
+                </th>*@
+
+
+
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Product.Unit)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.BrandModel.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandModel.Brand.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Company.Company_Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase.UnitPrice)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Purchase.Discount)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase.TotalPrice)
+                </td>
+                <td>@item.Purchase.PurchaseDate.ToString("dd/MM/yyyy")</td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Purchase.Product.Id)
+                    </td>*@
+                <td>
+                        <a asp-action="Edit" asp-route-id="@item.Purchase.PurchaseId">Edit</a> |
+                        @*<a asp-action="Details" asp-route-id="@item.Purchase.PurchaseId">Details</a> |*@
+                        <a asp-action="Delete" asp-route-id="@item.Purchase.PurchaseId">Delete</a>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>

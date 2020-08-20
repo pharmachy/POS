@@ -1,0 +1,27 @@
+﻿@model POS.Models.Unit
+
+
+
+
+@using (Html.BeginForm("Insert", "Unit", FormMethod.Post))
+{
+    <table border="1" cellpadding="10">
+        <tr>
+            <td>Unit ID :</td>
+            <td>@Html.TextBoxFor(m => m.Id)</td>
+        </tr>
+        <tr>
+            <td>Unit Name :</td>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>        
+      
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Save"
+                       formaction="/Unit/insert" />
+                <input type="submit" value="Cancel"
+                       formaction="/Unit/index" />
+            </td>
+        </tr>
+    </table>
+}

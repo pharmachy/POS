@@ -1,0 +1,118 @@
+﻿@model POS.Models.Unit
+@{
+
+    ViewData["Title"] = "Create";
+}
+
+@{
+    List<Unit> listofOption = ViewBag.Unit as List<Unit>;
+
+    <div class="row">
+
+        <div class="col-md-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"></a>Home</li>
+                            <li class="breadcrumb-item active" aria-current="page">Unit List</li>
+                        </ol>
+                    </nav>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form id="myForm" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>                              
+                                <div class="form-group">
+                                    <input type="submit" id="btnSubmit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-8 table-responsive-md">                           
+                            <br /><br />
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="background-color:burlywood">
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>                                     
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in listofOption)
+                                    {
+                                        <tr id="row_@item.Id">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>                                           
+                                            <td>
+                                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>                                               
+                                                <a class="text-danger btn btn-danger" onclick="ConfirmDelete(@item.Id)"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                            <h3 class="modal-title">Delete Unit</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Are you sure to delete this.?</h4>
+                                            <div style="text-align:center;display:none" id="loaderDiv">
+                                                <img src="~/images/gif.png" style="height:200px; width:200px" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                            <a href="#" class="btn btn-success" onclick="DeleteDepartment()">Confirm</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hiddenPackId" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">       
+        var ConfirmDelete = function (Id) {
+            $("#hiddenPackId").val(Id);
+            $("#myModal").modal('show');
+        }
+        var DeleteDepartment = function () {
+            $("#loaderDiv").show();
+            var unitId = $("#hiddenPackId").val();
+            $.ajax({
+                type: "POST",
+                url: "/Unit/DeleteUnit",
+                data: { Id: unitId },
+                success: function (result) {
+                    $("#loaderDiv").hide();
+                    $("#myModal").modal("hide");
+                    $("#row_" + unitId).remove();
+
+                }
+            })
+        }
+    </script>
+
+}
+
+
+

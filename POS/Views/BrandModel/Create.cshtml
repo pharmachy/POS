@@ -1,0 +1,231 @@
+﻿@model POS.Models.BrandModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<style type="text/css">
+    .form-style-9 {
+        max-width: 800px;
+        background: #FAFAFA;
+        padding: 30px;
+        margin: 50px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+    }
+
+        .form-style-9 ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+            .form-style-9 ul li {
+                display: block;
+                margin-bottom: 10px;
+                min-height: 35px;
+            }
+
+                .form-style-9 ul li .field-style {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    padding: 8px;
+                    outline: none;
+                    border: 1px solid #B0CFE0;
+                    -webkit-transition: all 0.30s ease-in-out;
+                    -moz-transition: all 0.30s ease-in-out;
+                    -o-transition: all 0.30s ease-in-out;
+                }
+
+                    .form-style-9 ul li .field-style:focus {
+                        box-shadow: 0 0 5px #B0CFE0;
+                        border: 1px solid #B0CFE0;
+                    }
+
+                .form-style-9 ul li .field-split {
+                    width: 49%;
+                }
+
+                .form-style-9 ul li .field-full {
+                    width: 100%;
+                }
+
+                .form-style-9 ul li input h5 .align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li input h5.align-left {
+                    float: left;
+                }
+
+                .form-style-9 ul li textarea {
+                    width: 100%;
+                    height: 100px;
+                }
+
+                .form-style-9 ul li input[type="button"],
+                .form-style-9 ul li input[type="submit"] {
+                    -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    box-shadow: inset 0px 1px 0px 0px #3985B1;
+                    background-color: #216288;
+                    border: 1px solid #17445E;
+                    display: inline-block;
+                    cursor: pointer;
+                    color: #FFFFFF;
+                    padding: 8px 18px;
+                    text-decoration: none;
+                    font: 12px Arial, Helvetica, sans-serif;
+                }
+
+                    .form-style-9 ul li input[type="button"]:hover,
+                    .form-style-9 ul li input[type="submit"]:hover {
+                        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+                        background-color: #28739E;
+                    }
+
+    #bck {
+        background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+        background-color: #28739E;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+</style>
+@{
+    List<BrandModel> list = ViewBag.BrandModel as List<BrandModel>;
+    <div class="row">
+        <div class="col-md-5">
+
+            <form class="form-style-9" asp-action="Create">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h2>Add new Model </h2>
+                <hr style="background-color:cadetblue" />
+                <ul>
+                    @*<li>
+                        <h5>Product Name:</h5>
+                        <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+
+                        <span asp-validation-for="ProductId" class="text-danger"></span>
+                    </li>*@
+                    <li>
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </li>
+                    <li>
+                        <label asp-for="Remarks" class="control-label"></label>
+                        <input asp-for="Remarks" class="form-control" />
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                    </li>
+                    @*<li>
+                        <label asp-for="CreateDate" class="control-label"></label>
+                      
+                        <input type="text" id="date" value="@ViewBag.Date" autocomplete="off" asp-for="CreateDate" class=" form-control" placeholder="Date" />
+
+                        <span asp-validation-for="CreateDate" class="text-danger"></span>
+                    </li>*@
+                    <li>
+                        <label asp-for="Brand.BrandName" class="control-label"></label>
+                        <select asp-for="BrandId" class="form-control" asp-items="ViewBag.TestParentId"></select>
+
+                        @*<select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>*@
+
+                    </li>
+
+
+                    <li>
+                        <input type="submit" value="Save" class="form-control" />
+
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" class="btn btn-danger form-control" id="bck">Back</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="col-md-7 form-style-9">
+            <table class="table table-striped">
+                <thead>
+                    <tr style="background-color:burlywood">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Remarks)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Brand.BrandName)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in list)
+                    {
+                        <tr>
+                            <td>
+                                @c.Name
+                            </td>
+                            <td>
+                                @c.Remarks
+                            </td>
+                            <td>
+                                @c.CreateDate.ToString("dd/MM/yyyy")
+                            </td>
+
+                            <td>
+                                @c.Brand.BrandName
+                            </td>
+                            <td>
+                                <a class="text-primary btn btn-primary" asp-action="Edit" asp-route-id="@c.Id"><i class="fa fa-edit"></i>Edit</a>
+                            </td>
+                            <td><a class="text-danger btn btn-danger" asp-action="Delete" asp-route-id="@c.Id"><i class="fa fa-trash"></i>Delete</a></td>
+
+                            @*<td>
+                            <a asp-action="Edit" asp-route-id="@c.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@c.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@c.Id">Delete</a>
+                        </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div></div>
+        }
+
+        @section Scripts{
+
+
+            <script type="text/javascript">
+
+                $(function () {
+                    $('#date').datepicker({
+                        autoclose: true
+                    });
+
+
+                    ////Date picker
+                    //$('[data-datetimepicker]').datetimepicker({
+                    //    format: 'DD-MM-YYYY'
+                    //}).on('dp.change', function (ev) {
+                    //});
+                    ////Date range picker
+                    $('#reservation').daterangepicker();
+
+
+
+                });
+
+            </script>
+        }

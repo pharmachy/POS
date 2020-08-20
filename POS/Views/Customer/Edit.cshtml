@@ -1,0 +1,96 @@
+﻿@model POS.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index">Customer List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">New Customer</li>
+                    </ol>
+                </nav>
+                <br /><br />
+                      <form asp-action="Edit">
+                          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                          
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="Code"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="Code" class=" form-control" placeholder="Code" />
+                                  <span asp-validation-for="Code" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="Name"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="Name" class=" form-control" placeholder="Name" />
+                                  <span asp-validation-for="Name" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="Address"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="Address" class=" form-control" placeholder="Address" />
+                                  <span asp-validation-for="Address" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="Email"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="Email" class=" form-control" placeholder="Email" />
+                                  <span asp-validation-for="Email" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="Contact"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="Contact" class=" form-control" placeholder="Contact" />
+                                  <span asp-validation-for="Contact" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label asp-for="LoyalityPoint"></label>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <input asp-for="LoyalityPoint" class=" form-control" placeholder="LoyalityPoint" />
+                                  <span asp-validation-for="LoyalityPoint" class="text-danger"></span>
+                              </div>
+                              <div class="col-md-2"></div>
+                          </div>
+
+                          <div class="form-group">
+                              <input type="submit" value="Save" class="btn btn-default" />
+                          </div>
+                      </form>
+            </div>
+        </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-Oss.Zakat-6436E57E-4333-45B8-BFE5-62E7C4DB789A</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200113100519_nisab.cs" />
+    <Compile Remove="Data\Migrations\20200113100519_nisab.Designer.cs" />
+    <Compile Remove="Migrations\20200416081406_SomePropCodeToPropId.cs" />
+    <Compile Remove="Migrations\20200416081406_SomePropCodeToPropId.Designer.cs" />
+    <Compile Remove="Migrations\20200416082122_dd.cs" />
+    <Compile Remove="Migrations\20200416082122_dd.Designer.cs" />
+    <Compile Remove="Migrations\20200416102506_BrandpropCompanyId.cs" />
+    <Compile Remove="Migrations\20200416102506_BrandpropCompanyId.Designer.cs" />
+    <Compile Remove="Migrations\20200419075135_POandDetails.cs" />
+    <Compile Remove="Migrations\20200419075135_POandDetails.Designer.cs" />
+    <Compile Remove="Migrations\20200419092714_IdgenertedOredrDetail.cs" />
+    <Compile Remove="Migrations\20200419092714_IdgenertedOredrDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200420083551_DeliveryDateaddedTOpo.cs" />
+    <Compile Remove="Migrations\20200420083551_DeliveryDateaddedTOpo.Designer.cs" />
+    <Compile Remove="Migrations\20200426091638_add-migration.cs" />
+    <Compile Remove="Migrations\20200426091638_add-migration.Designer.cs" />
+    <Compile Remove="Migrations\20200426091801_PurchasePropAddedorderId.cs" />
+    <Compile Remove="Migrations\20200426091801_PurchasePropAddedorderId.Designer.cs" />
+    <Compile Remove="Migrations\20200426091859_ss.cs" />
+    <Compile Remove="Migrations\20200426091859_ss.Designer.cs" />
+    <Compile Remove="Migrations\20200426092024_PropPurchaseAddedORDERID.cs" />
+    <Compile Remove="Migrations\20200426092024_PropPurchaseAddedORDERID.Designer.cs" />
+    <Compile Remove="Migrations\20200426094343_PurchaseActionPurchaseByPo.cs" />
+    <Compile Remove="Migrations\20200426094343_PurchaseActionPurchaseByPo.Designer.cs" />
+    <Compile Remove="Migrations\20200426094615_PurchaseByPo.cs" />
+    <Compile Remove="Migrations\20200426094615_PurchaseByPo.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Account\Login - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Purchase\Create.cshtml" />
+    <None Include="Views\Purchase\Index.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginLayout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\TestChilds\Create.cshtml" />
+    <None Include="Views\TestChilds\Delete.cshtml" />
+    <None Include="Views\TestChilds\Details.cshtml" />
+    <None Include="Views\TestChilds\Edit.cshtml" />
+    <None Include="Views\TestChilds\Index.cshtml" />
+    <None Include="Views\TestParents\Create.cshtml" />
+    <None Include="Views\TestParents\Delete.cshtml" />
+    <None Include="Views\TestParents\Details.cshtml" />
+    <None Include="Views\TestParents\Edit.cshtml" />
+    <None Include="Views\TestParents\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\products\" />
+  </ItemGroup>
+
+</Project>

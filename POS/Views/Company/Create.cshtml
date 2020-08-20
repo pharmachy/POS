@@ -1,0 +1,63 @@
+﻿@model POS.Models.Company
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div class="card-body">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index">Manufacturer List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">New Manufacturer</li>
+        </ol>
+    </nav>
+ </div>
+
+    <form class="form-style-9" asp-action="Create">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h2>Add new Manufacturer </h2>
+        <hr style="background-color:cadetblue" />
+        <ul>
+            <li>
+                <h5>Manufacturer Name:</h5>
+                <input type="text" class="form-control" asp-for="Company_Name" placeholder="Enter Manufacturer name" />
+                <span asp-validation-for="Company_Name" class="text-danger"></span>
+            </li>
+            <li>
+                <h5>Phone:</h5>
+                <input type="number" class="form-control" asp-for="Phone" placeholder="Enter Phone" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </li>
+            <li>
+                <h5>Email:</h5>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Enter Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </li>
+            <li>
+                <h5>Website:</h5>
+                <input type="text" class="form-control" asp-for="Website" placeholder="Enter Website" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </li>
+            <li>
+                <h5>Address:</h5>
+                <input type="text" class="form-control" asp-for="Address" placeholder="Enter Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </li>
+            <li class="col-md-12">
+                <div class="col-md-6">
+                    <input type="submit" value="Save" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <a asp-action="Index" class="btn btn-warning form-control" id="bck">Back</a>
+                </div>
+            </li>
+            <li></li>
+        </ul>
+    </form>
+
+
+   

@@ -1,0 +1,74 @@
+﻿@model POS.Models.Supplier
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+<form class="form-style-9" asp-action="Edit">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <h2>Add new supplier </h2>
+    <hr style="background-color:crimson" />
+    <ul>
+        <li>
+            <h5>SL:</h5>
+            <input type="text" class="form-control" asp-for="Code" placeholder="Enter code" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Name:</h5>
+            <input type="text" class="form-control" asp-for="Name" placeholder="Enter name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Address Line 1:</h5>
+            <input type="text" class="form-control" asp-for="Address" placeholder="Enter Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Address Line 2:</h5>
+            <input type="text" class="form-control" asp-for="Address2" placeholder="Enter Address" />
+            <span asp-validation-for="Address2" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Contact:</h5>
+            <input type="number" class="form-control" asp-for="Contact" placeholder="Enter Contact number" />
+            <span asp-validation-for="Contact" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Email:</h5>
+            <input type="email" class="form-control" asp-for="Email" placeholder="Enter Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Contact Person:</h5>
+            <input type="text" class="form-control" asp-for="ContactPerson" placeholder="Enter Contact Person" />
+            <span asp-validation-for="ContactPerson" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Phone:</h5>
+            <input type="text" class="form-control" asp-for="Phone" placeholder="Enter Contact Person" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Email:</h5>
+            <input type="text" class="form-control" asp-for="CEmail" placeholder="Enter Contact Person" />
+            <span asp-validation-for="CEmail" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Address:</h5>
+            <input type="text" class="form-control" asp-for="CAddress" placeholder="Enter Contact Person" />
+            <span asp-validation-for="CAddress" class="text-danger"></span>
+        </li>
+        <li class="col-md-12">
+            <div class="col-md-6">
+                <input type="submit" value="Update" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Index" class="btn btn-warning form-control" id="bck">Back</a>
+            </div>
+        </li>
+        <li></li>
+    </ul>
+</form>

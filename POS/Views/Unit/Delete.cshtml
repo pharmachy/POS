@@ -1,0 +1,42 @@
+﻿@model POS.Models.Unit
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+<div class="card">
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="Create">Unit List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Unit</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<form class="form-style-9" asp-action="Delete">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <h2 style="color:red">Are you sure to delete Unit?</h2>
+    <hr style="background-color:cadetblue" />
+    <ul>
+        <li>
+            <h5>Unit Name:</h5>
+            <input type="text" class="form-control" asp-for="Name" placeholder="Enter name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </li>
+        <li class="col-md-12">
+            <div class="col-md-6">
+                <input type="submit" value="Delete" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Create" class="btn btn-warning form-control" id="bck">Back</a>
+            </div>
+        </li>
+        <li></li>
+    </ul>
+</form>
+

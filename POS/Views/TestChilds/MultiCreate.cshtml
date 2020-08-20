@@ -1,0 +1,93 @@
+﻿@*@model POS.Models.TestChild*@
+@model POS.ViewModels.GeneralVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>TestChild</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MultiCreate">
+            <input type="hidden" id="jsonarray" name="ItemList" />
+
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="GeneralPO.Extra" class="control-label"></label>
+                <input asp-for="GeneralPO.Extra" id="GeneralPOExtra" class="form-control" />
+                <span asp-validation-for="GeneralPO.Extra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestParentId" class="control-label"></label>
+                <select asp-for="TestParentId" class="form-control" asp-items="ViewBag.TestParentId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestParentName" class="control-label"></label>
+                <input asp-for="TestParentName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit"onchange="btnaddclick()" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section ScriptFile{
+    <script>
+        var data = [];
+        
+   $(document).ready(function () {     
+       function btnaddclick() {
+           var GeneralPOExtra = $('#GeneralPOExtra').val();
+           data = { CategoryId: GeneralPOExtra };
+           $("#jsonarray").val(JSON.stringify(data));
+       }
+        function showtabledetailsdata(data) {
+            if (data) {
+                $("#jsonarray").val(JSON.stringify(data));
+                var len = 0;
+                var totalamt = 0;
+                var txt = "";
+                $(data).each(function (index) {
+                    txt += "<tr><td>" + data[len].CounterId + "</td><td>" + data[len].ItemTypeName + "</td>" +
+                        "<td>" + data[len].ItemName + "</td><td>" + data[len].GrossQty + "</td><td>" + data[len].PackQty + "</td><td>" + data[len].UnitQty + "</td>" +
+                        "<td>" + data[len].UnitRate + "</td><td>" + data[len].Amount + "</td>" +
+                        "<td><a id='btnDlt' class='btn btn-danger btn-xs no-print' data-tooltip='tooltip' title='Delete'  " +
+                        "onclick='deletejosnarray(" + data[len].CounterId + ");'><i class='fa fa-trash-o'></i></a></td></tr>";
+                    totalamt += parseFloat(data[len].Amount);
+                    len++;
+                });
+                if (txt !== "") {
+                    $("#tblDetailsShow tbody").empty();
+                    $("#tblDetailsShow tbody").append(txt);
+                    $('#TotalAmount').val(totalamt.toFixed(2));
+                    DiscountNetAmountCalculation();
+                } else {
+                    $("#tblDetailsShow tbody").empty();
+                    $('#TotalAmount').val("0.00");
+                }
+            }
+        }
+
+
+    </script>
+        
+
+
+}

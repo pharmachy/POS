@@ -1,0 +1,115 @@
+﻿@model POS.Models.Sale
+
+@{
+    ViewData["Title"] = "Create";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+
+<form class="form-style-9" asp-action="Create">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h2>Add new products to Sale</h2>
+    <hr style="background-color:cadetblue" />
+    <ul>
+        <li>
+            <h5>Product Name:</h5>
+            <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Sales Date:</h5>
+            <input type="text" id="date" class="form-control" asp-for="Sales_Date" value="@ViewBag.Date" placeholder="Enter Date" />
+            <span asp-validation-for="Sales_Date" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Quantity:</h5>
+            <input type="text" class="form-control" asp-for="Quantity" placeholder="Enter Quantity" id="Quantity" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Sales Price:</h5>
+            <input type="number" class="form-control" asp-for="Sales_price" placeholder="Enter Sales Price" id="Sales_Price" onchange="Dis()" />
+            <span asp-validation-for="Sales_price" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Discount:</h5>
+            <input type="number" class="form-control" asp-for="Discount" placeholder="Enter Discount" id="Discount" onchange="Dis()" />
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </li>
+        <li>
+            <h5>Discount Price:</h5>
+            <input type="number" class="form-control"  placeholder="Enter Discount" id="DiscountPrice" onchange="Dis()" readonly/>
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </li>
+        <li></li>
+        <li class="col-md-12">
+            <div class="col-md-6">
+                <input type="submit" value="Save" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Index" class="btn btn-warning form-control" id="bck">Back</a>
+            </div>
+        </li>
+        <li>
+        </li>
+    </ul>
+</form>
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+       
+            
+
+        $(function () {
+            $("#Quantity").val(0);
+            $("#Sales_Price").val(0);
+            $("#Discount").val(0);
+            $("#Quantity").click(function () {
+                $("#Quantity").val("");
+            });
+            $("#Sales_Price").click(function () {
+                $("#Sales_Price").val("");
+            });
+            $("#Discount").click(function () {
+                $("#Discount").val("");
+            });
+
+            $("#Sales_Price").change(function () {
+                //var Quantity = $("#Quantity").val();
+                //var SalesPrice = $("#Sales_Price").val();
+                //var Discount = $("#Discount").val();
+                //var value = parseFloat(SalesPrice) * parseFloat(Quantity);
+                //var Total = value - parseFloat(Discount);
+                //$("#DiscountPrice").val(Total);
+
+                Dis();
+
+            });
+            $("#Discount").change(function () {
+                Dis();
+            });
+
+
+            function Dis() {
+            var Quantity = $("#Quantity").val();
+                var SalesPrice = $("#Sales_Price").val();
+                var Discount = $("#Discount").val();
+            var value = parseFloat(SalesPrice) * parseFloat(Quantity);
+            var disPer = (Discount / 100);
+           
+                var Total = value * (1 - disPer);
+                $("#DiscountPrice").val(Total);
+            }
+
+              $('#date').datepicker({
+                autoclose: true
+            });
+            $('#reservation').daterangepicker();
+    });
+
+    </script>
+}
